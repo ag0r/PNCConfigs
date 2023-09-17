@@ -1,0 +1,26 @@
+ Log file for the subroutine "tool_touch_off.ngc" Version 3.0 from TooTall18T
+ Fast: 1000.000000
+ FAST.var: 1000.000000
+ Slow: 200.000000
+ SLOW.var: 200.000000
+ Zmax travel: 60.000000
+ ZMAX TRAVEL.var: 60.000000
+ XY max travel: 0.000000
+ XY MAX TRAVEL.var: 0.000000
+ spindle_zero_height: 89.800000
+ SPINDLE ZERO HEIGHT.var: 89.800000
+ Retract: 3.000000
+ RETRACT.var: 3.000000
+ Back: 1.000000
+ tool touch z coodrs: -89.800000
+ tool table: 0.000000
+ tool min dis: 30.000000
+ Brake: 1.000000
+ Automatic: 0.000000
+ Parameters: 0.000000
+ Old tool: 3.000000 / New tool: 9.000000
+ Offset_Z: 80.000000
+ Old tool length: 110.796666
+ Probe start pos: 0.000000
+ max travel: 89.800000
+ New tool length: 30.685625

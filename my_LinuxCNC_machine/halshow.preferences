@@ -1,0 +1,21 @@
+# Halshow settings
+# This file is generated automatically.
+wm geometry . 1063x629+755+138
+placeFrames 0.3052982586143016
+set ::ratio 0.3052982586143016
+set ::old_w_leftf 824
+set ::watchlist {
+    sig+coolant-flood
+    sig+coolant-mist
+    pin+hm2_7i92.0.gpio.000.out
+    pin+hm2_7i92.0.gpio.002.out
+    pin+hm2_7i92.0.gpio.002.in
+    pin+hm2_7i92.0.gpio.000.in
+}
+set ::workmode watchhal
+set ::watchInterval 100
+set ::col1_width 100
+set ::ffmts 
+set ::ifmts 
+set ::alwaysOnTop 0
+set ::autoSaveWatchlist 1
