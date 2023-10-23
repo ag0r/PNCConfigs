@@ -6,7 +6,7 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadrt hostmot2
-loadrt hm2_eth board_ip="10.10.10.10" config="num_encoders=0 num_pwmgens=0 num_stepgens=5" 
+loadrt hm2_eth board_ip="10.10.10.10" config="num_encoders=1 num_pwmgens=0 num_stepgens=5" 
 setp    hm2_7i92.0.watchdog.timeout_ns 5000000
 loadrt pid names=pid.x,pid.y,pid.y2,pid.z,pid.s
 
@@ -40,12 +40,12 @@ net x-enable                                 => hm2_7i92.0.stepgen.04.enable
 # external output signals
 
 # --- COOLANT-FLOOD ---
-setp hm2_7i92.0.gpio.017.is_output true
-net coolant-flood iocontrol.0.coolant-flood =>     hm2_7i92.0.gpio.000.out
+#setp hm2_7i92.0.gpio.017.is_output true
+#net coolant-flood iocontrol.0.coolant-flood =>     hm2_7i92.0.gpio.000.out
 
 # --- COOLANT-MIST ---
-setp hm2_7i92.0.gpio.018.is_output true
-net coolant-mist iocontrol.0.coolant-mist =>     hm2_7i92.0.gpio.002.out
+#setp hm2_7i92.0.gpio.018.is_output true
+#net coolant-mist iocontrol.0.coolant-mist =>     hm2_7i92.0.gpio.002.out
 
 # external input signals
 
@@ -71,13 +71,10 @@ net din-00     <=  hm2_7i92.0.gpio.008.in_not
 net din-01     <=  hm2_7i92.0.gpio.010.in_not
 
 # --- DIN-02 ---
-net din-02     <=  hm2_7i92.0.gpio.012.in
+net din-02     <=  hm2_7i92.0.gpio.012.in_not
 
 # --- DIN-03 ---
 net din-03     <=  hm2_7i92.0.gpio.014.in_not
-
-# --- PROBE-IN ---
-net probe-in     <=  hm2_7i92.0.gpio.016.in
 
 #*******************
 #  AXIS X JOINT 0
@@ -330,7 +327,28 @@ net MDI-mode              halui.mode.is-mdi
 
 #  ---probe signal---
 
-net probe-in     =>  motion.probe-input
+loadrt or2 count=1
+loadrt dbounce names=spindle-probe-db,tool-setter-db
+setp spindle-probe-db.delay 3
+setp tool-setter-db.delay 3
+
+addf spindle-probe-db servo-thread
+addf tool-setter-db servo-thread
+addf or2.0 servo-thread
+
+net raw-tool-setter-in     <=  hm2_7i92.0.gpio.016.in
+net raw-tool-setter-in     =>  tool-setter-db.in
+net tool-setter-in         <=  tool-setter-db.out
+
+net raw-spindle-probe-in   <=  hm2_7i92.0.gpio.000.in
+net raw-spindle-probe-in   =>  spindle-probe-db.in
+net spindle-probe-in       <=  spindle-probe-db.out
+
+net tool-setter-in     => or2.0.in0
+net spindle-probe-in   => or2.0.in1
+
+net probe-in           <= or2.0.out
+net probe-in           =>  motion.probe-input
 
 #  ---motion control signals---
 
@@ -346,7 +364,12 @@ net din-03     =>  motion.digital-in-03
 #  ---estop signals---
 
 net estop-out     <=  iocontrol.0.user-enable-out
-net estop-ext     =>  iocontrol.0.emc-enable-in
+loadrt and2 count=1
+addf and2.0 servo-thread
+net estop-ext     => and2.0.in0
+net pendant-estop => and2.0.in1
+net estop-ctrl    <= and2.0.out
+net estop-ctrl     =>  iocontrol.0.emc-enable-in
 
 #  ---manual tool change signals---
 

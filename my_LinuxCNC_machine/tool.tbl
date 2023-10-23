@@ -1,20 +1,21 @@
-T1   P1   D+3.000000 Z+9.007067 Q1 ; 3mm end mill sample tool
+T1   P1   D+3.000000 Z+19.637708 Q1 ; 3mm end mill sample tool
 T2   P4   D+1.500000 Z+28.572292 Q1 ; 1.5mm  end mill sample tool
-T3   P3   D+5.000000 Z+20.398959 Q1 ; 5mm tap drill sample tool
-T4   P2   D+16.000000 Z+10.000000 Q1 ; 16 mm sample tool
-T5   P5   D+25.000000 Z+178.632289 Q1 ; 25mm er sample tool
-T9   P9   Z+30.685625 Q1 ; Added 20230714
-T10  P0   Z+6.472292 Q1 ; New Tool
+T3   P3   D+5.000000 Z+20.377917 Q1 ; 5mm tap drill sample tool
+T4   P2   D+16.000000 Z+33.540719 Q1 ; 16 mm sample tool
+T5   P5   D+25.000000 Z+6.605625 Q1 ; 25mm er sample tool
+T9   P9   Z+14.177917 Q1 ; Added 20230714
+T10  P0   Z+16.494584 Q1 ; New Tool
 T11  P0   Q1 ; New Tool
 T12  P0   Z+10.105625 Q1 ; New Tool
-T13  P0   Q1 ; New Tool
+T13  P0   Z+63.182292 Q1 ; New Tool
 T14  P0   Q1 ; New Tool
 T15  P0   Q1 ; New Tool
 T16  P0   Q1 ; New Tool
 T17  P0   Q1 ; New Tool
 T18  P0   Q1 ; New Tool
 T19  P0   Q1 ; New Tool
-T20  P0   Z+5.172583 Q1 ; New Tool
-T21  P0   Z+12.347475 Q1 ; New Tool
+T20  P0   Z+6.602291 Q1 ; New Tool
+T21  P0   Z+13.633208 Q1 ; New Tool
 T22  P0   Q1 ; New Tool
 T23  P0   Q1 ; New Tool
+T99  P0   D+2.950000 Z+34.527042 Q1 ; probe
